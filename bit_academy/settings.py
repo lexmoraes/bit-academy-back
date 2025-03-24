@@ -5,13 +5,14 @@ from pathlib import Path
 
 BASE_DIR = Path(__file__).resolve().parent.parent
 
-ENVIROMENT = os.getenv("DJANGO_ENV", "development")
-ENV_FILE = f".env.{ENVIROMENT}"
-env_path = BASE_DIR / ENV_FILE
-if env_path.exists():
-    load_dotenv(env_path)
-else:
-    raise FileNotFoundError(f"Arquivo de ambiente '{ENV_FILE}' não encontrado.")
+ENVIROMENT = os.getenv("DJANGO_ENV")
+if ENVIROMENT == "development":
+    ENV_FILE = f".env.{ENVIROMENT}"
+    env_path = BASE_DIR / ENV_FILE
+    if env_path.exists():
+        load_dotenv(env_path)
+    else:
+        raise FileNotFoundError(f"Arquivo de ambiente '{ENV_FILE}' não encontrado.")
 
 SECRET_KEY = os.getenv("SECRET_KEY", "123456")
 DEBUG = os.getenv("DEBUG", "False") == "True"
