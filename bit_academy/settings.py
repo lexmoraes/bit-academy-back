@@ -1,11 +1,11 @@
 import os
 import dj_database_url
-from dotenv import load_dotenv, find_dotenv
+from dotenv import load_dotenv
 from pathlib import Path
 
 BASE_DIR = Path(__file__).resolve().parent.parent
 
-ENVIROMENT = os.getenv("DJANGO_ENV")
+ENVIROMENT = os.getenv("DJANGO_ENV", "development")
 if ENVIROMENT == "development":
     ENV_FILE = f".env.{ENVIROMENT}"
     env_path = BASE_DIR / ENV_FILE
@@ -91,5 +91,7 @@ STATIC_URL = "static/"
 STATIC_ROOT = os.path.join(BASE_DIR, "staticfiles")
 
 STATICFILES_DIRS = [os.path.join(BASE_DIR, "static")]
+
+STATICFILES_STORAGE = "whitenoise.storage.CompressedManifestStaticFilesStorage"
 
 DEFAULT_AUTO_FIELD = "django.db.models.BigAutoField"
