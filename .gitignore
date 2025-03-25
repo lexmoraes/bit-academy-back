@@ -19,11 +19,10 @@ env/
 db.sqlite3
 *.sqlite3
 media/
-staticfiles/
-static/
 local_settings.py
 .env
 .env.*
+staticfiles/
 
 # Logs
 logs/
