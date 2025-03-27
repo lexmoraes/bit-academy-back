@@ -15,7 +15,7 @@ if ENVIROMENT == "development":
         raise FileNotFoundError(f"Arquivo de ambiente '{ENV_FILE}' não encontrado.")
 
 SECRET_KEY = os.getenv("SECRET_KEY", "123456")
-DEBUG = os.getenv("DEBUG", "False") == "True"
+DEBUG = os.getenv("DEBUG", "True") == "True"
 ALLOWED_HOSTS = os.getenv("ALLOWED_HOSTS", "*").split(",")
 
 
