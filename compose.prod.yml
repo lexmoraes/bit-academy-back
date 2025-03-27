@@ -1,0 +1,20 @@
+services:
+  web:
+    container_name: "bit-academy"
+    build: .
+    volumes:
+      - ./:/app
+    ports:
+      - "8000:8000"
+    env_file:
+      - .env.development
+    depends_on:
+      - database
+
+  database:
+    container_name: "postgres-dev"
+    image: "postgres:16.7-alpine"
+    env_file:
+      - .env.development
+    ports:
+      - "5432:5432"
