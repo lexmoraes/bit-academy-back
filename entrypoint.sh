@@ -17,7 +17,7 @@ python manage.py collectstatic --noinput
 # Inicia o servidor Gunicorn em Produção ou Django em outros ambientes.
 if [ "$DJANGO_ENV" = "production" ]; then
   echo "Iniciando Gunicorn..."
-  exec gunicorn --bind 0.0.0.0:8000 bit_academy.wsgi:application
+  exec gunicorn --bind 0.0.0.0:8080 bit_academy.wsgi:application
 else
   echo "Iniciando runserver..."
   exec python manage.py runserver 0.0.0.0:8000
