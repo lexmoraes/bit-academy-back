@@ -1,0 +1,12 @@
+[tool.ruff.lint]
+# Habilita/desabilita regras específicas
+select = ["E", "F", "I", "W"]
+ignore = ["E501"]  # Ignora linhas muito longas
+
+[tool.ruff.format]
+# Configurações de formatação
+quote-style = "double"  # Usa aspas duplas
+
+[tool.ruff.lint.isort]
+# Configurações do ISort (ordenação de imports)
+known-first-party = ["bit-academy-back"]
