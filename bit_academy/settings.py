@@ -7,8 +7,8 @@ from dotenv import load_dotenv
 BASE_DIR = Path(__file__).resolve().parent.parent
 
 ENVIROMENT = os.getenv("DJANGO_ENV", "development")
-if ENVIROMENT == "development":
-    ENV_FILE = f".env.{ENVIROMENT}"
+if ENVIROMENT != "production":
+    ENV_FILE = ".env.development"
     env_path = BASE_DIR / ENV_FILE
     if env_path.exists():
         load_dotenv(env_path)
