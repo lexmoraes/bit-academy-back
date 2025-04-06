@@ -1,24 +1,22 @@
 import os
 from pathlib import Path
 
-import dj_database_url
 from dotenv import load_dotenv
 
 BASE_DIR = Path(__file__).resolve().parent.parent
 
 ENVIROMENT = os.getenv("DJANGO_ENV", "development")
-if ENVIROMENT != "production":
-    ENV_FILE = ".env.development"
-    env_path = BASE_DIR / ENV_FILE
-    if env_path.exists():
-        load_dotenv(env_path)
-    else:
-        raise FileNotFoundError(f"Arquivo de ambiente '{ENV_FILE}' não encontrado.")
+
+env_file = f".env.{ENVIROMENT}"
+env_path = BASE_DIR / env_file
+if env_path.exists():
+    load_dotenv(dotenv_path=env_path)
+else:
+    raise FileNotFoundError(f"Arquivo de ambiente '{env_file}' não encontrado.")
 
 SECRET_KEY = os.getenv("SECRET_KEY", "123456")
 DEBUG = os.getenv("DEBUG", "True") == "True"
 ALLOWED_HOSTS = os.getenv("ALLOWED_HOSTS", "*").split(",")
-
 
 INSTALLED_APPS = [
     "django.contrib.admin",
@@ -60,37 +58,21 @@ TEMPLATES = [
 
 WSGI_APPLICATION = "bit_academy.wsgi.application"
 
-DATABASES = {"default": dj_database_url.config(default=os.getenv("DATABASE_URL"))}
-
 AUTH_PASSWORD_VALIDATORS = [
-    {
-        "NAME": "django.contrib.auth.password_validation.UserAttributeSimilarityValidator",
-    },
-    {
-        "NAME": "django.contrib.auth.password_validation.MinimumLengthValidator",
-    },
-    {
-        "NAME": "django.contrib.auth.password_validation.CommonPasswordValidator",
-    },
-    {
-        "NAME": "django.contrib.auth.password_validation.NumericPasswordValidator",
-    },
+    {"NAME": "django.contrib.auth.password_validation.UserAttributeSimilarityValidator"},
+    {"NAME": "django.contrib.auth.password_validation.MinimumLengthValidator"},
+    {"NAME": "django.contrib.auth.password_validation.CommonPasswordValidator"},
+    {"NAME": "django.contrib.auth.password_validation.NumericPasswordValidator"},
 ]
 
 LANGUAGE_CODE = "en-us"
-
 TIME_ZONE = "UTC"
-
 USE_I18N = True
-
 USE_TZ = True
 
 STATIC_URL = "static/"
-
 STATIC_ROOT = os.path.join(BASE_DIR, "staticfiles")
-
 STATICFILES_DIRS = [os.path.join(BASE_DIR, "static")]
-
 STATICFILES_STORAGE = "whitenoise.storage.CompressedManifestStaticFilesStorage"
 
 DEFAULT_AUTO_FIELD = "django.db.models.BigAutoField"
